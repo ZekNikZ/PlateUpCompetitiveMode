@@ -1,9 +1,11 @@
 ﻿using Kitchen;
 using KitchenMods;
 using MessagePack;
+using PlateUpCompetitiveMode.Utils;
 using TMPro;
 using Unity.Collections;
 using Unity.Entities;
+using UnityEngine;
 
 namespace PlateUpCompetitiveMode.Views
 {
@@ -30,6 +32,7 @@ namespace PlateUpCompetitiveMode.Views
         }
 
         public TextMeshPro MoneyNumber;
+        public MeshRenderer TeamColor;
 
         public ViewData Data;
 
@@ -47,6 +50,10 @@ namespace PlateUpCompetitiveMode.Views
             if (data.Money != Data.Money)
             {
                 MoneyNumber.text = $"{data.Team} - {data.Money}";
+            }
+            if (data.Team != Data.Team)
+            {
+                TeamColor.material.color = TeamConstants.TeamColors[data.Team];
             }
             Data = data;
             Mod.LogInfo("Team Money Display update end");
