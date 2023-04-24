@@ -2,9 +2,11 @@
 using KitchenLib;
 using KitchenLib.Event;
 using KitchenMods;
-using PlateUpCompetitiveMode.Utils;
+using PlateUpCompetitiveMode.Views;
 using System.Reflection;
 using UnityEngine;
+using MessagePack;
+using System.Text;
 
 // Namespace should have "Kitchen" in the beginning
 namespace PlateUpCompetitiveMode
@@ -18,7 +20,7 @@ namespace PlateUpCompetitiveMode
         public const string MOD_NAME = "Competitive Mode";
         public const string MOD_VERSION = "0.1.0";
         public const string MOD_AUTHOR = "ZekNikZ";
-        public const string MOD_GAMEVERSION = ">=1.1.3";
+        public const string MOD_GAMEVERSION = ">=1.1.5";
         // Game version this mod is designed for in semver
         // e.g. ">=1.1.3" current and all future
         // e.g. ">=1.1.3 <=1.2.3" for all from/until
@@ -69,11 +71,27 @@ namespace PlateUpCompetitiveMode
             // Register custom GDOs
             AddGameData();
 
+            byte[] bytes = MessagePackSerializer.Serialize(new TeamMoneyDisplayView.ViewData
+            {
+                Team = 2,
+                Money = 3
+            });
+            LogInfo($"====> {ByteArrayToString(bytes)}");
+
             // Perform actions when game data is built
             Events.BuildGameDataEvent += delegate (object s, BuildGameDataEventArgs args)
             {
             };
         }
+
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2} ", b);
+            return hex.ToString();
+        }
+
         #region Logging
         public static void LogInfo(string _log) { Debug.Log($"[{MOD_NAME}] " + _log); }
         public static void LogWarning(string _log) { Debug.LogWarning($"[{MOD_NAME}] " + _log); }

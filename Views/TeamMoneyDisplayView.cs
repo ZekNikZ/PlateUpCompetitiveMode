@@ -12,10 +12,10 @@ namespace PlateUpCompetitiveMode.Views
         [MessagePackObject(false)]
         public struct ViewData: ISpecificViewData, IViewData.ICheckForChanges<ViewData>
         {
-            [Key(1)]
+            [Key(0)]
             public int Money;
 
-            [Key(2)]
+            [Key(1)]
             public int Team;
 
             public IUpdatableObject GetRelevantSubview(IObjectView view)
@@ -46,7 +46,7 @@ namespace PlateUpCompetitiveMode.Views
             Mod.LogInfo("Team Money Display update start");
             if (data.Money != Data.Money)
             {
-                MoneyNumber.text = $"{Data.Team} - {Data.Money}";
+                MoneyNumber.text = $"{data.Team} - {data.Money}";
             }
             Data = data;
             Mod.LogInfo("Team Money Display update end");

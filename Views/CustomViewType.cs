@@ -1,5 +1,4 @@
 ﻿using Kitchen;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,14 +25,14 @@ namespace PlateUpCompetitiveMode.Views
 
         private readonly int Value;
 
-        private CustomViewType(int value, GameObject prefabGetter = null)
+        private CustomViewType(int value, GameObject prefab = null)
         {
             Value = value;
             Debug.Log(Values);
             Values.Add(value, this);
-            if (prefabGetter != null)
+            if (prefab != null)
             {
-                Prefabs.Add(this, prefabGetter);
+                Prefabs.Add(this, prefab);
             }
         }
 
