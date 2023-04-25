@@ -61,6 +61,9 @@ namespace PlateUpCompetitiveMode
 
         protected override void OnPostActivate(KitchenMods.Mod mod)
         {
+            LogInfo("==== OnPostActivate");
+
+
             // TODO: Uncomment the following if you have an asset bundle.
             // TODO: Also, make sure to set EnableAssetBundleDeploy to 'true' in your ModName.csproj
 
@@ -70,13 +73,6 @@ namespace PlateUpCompetitiveMode
 
             // Register custom GDOs
             AddGameData();
-
-            byte[] bytes = MessagePackSerializer.Serialize(new TeamMoneyDisplayView.ViewData
-            {
-                Team = 2,
-                Money = 3
-            });
-            LogInfo($"====> {ByteArrayToString(bytes)}");
 
             // Perform actions when game data is built
             Events.BuildGameDataEvent += delegate (object s, BuildGameDataEventArgs args)

@@ -9,10 +9,10 @@ using UnityEngine;
 
 namespace PlateUpCompetitiveMode.Views
 {
-    public class TeamMoneyDisplayView: UpdatableObjectView<TeamMoneyDisplayView.ViewData>
+    public class TeamMoneyDisplayView : UpdatableObjectView<TeamMoneyDisplayView.ViewData>
     {
-        [MessagePackObject(false)]
-        public struct ViewData: ISpecificViewData, IViewData.ICheckForChanges<ViewData>
+        [MessagePackObject]
+        public struct ViewData : IViewData, IViewData.ICheckForChanges<ViewData>
         {
             [Key(0)]
             public int Money;
@@ -20,10 +20,10 @@ namespace PlateUpCompetitiveMode.Views
             [Key(1)]
             public int Team;
 
-            public IUpdatableObject GetRelevantSubview(IObjectView view)
-            {
-                return view.GetSubView<TeamMoneyDisplayView>();
-            }
+            //public IUpdatableObject GetRelevantSubview(IObjectView view)
+            //{
+            //    return view.GetSubView<TeamMoneyDisplayView>();
+            //}
 
             public bool IsChangedFrom(ViewData check)
             {
@@ -51,7 +51,7 @@ namespace PlateUpCompetitiveMode.Views
             {
                 MoneyNumber.text = $"{data.Team} - {data.Money}";
             }
-            if (data.Team != Data.Team)
+            if (TeamColor != null && data.Team != Data.Team)
             {
                 TeamColor.material.color = TeamConstants.TeamColors[data.Team];
             }

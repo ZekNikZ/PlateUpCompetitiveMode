@@ -17,7 +17,6 @@ namespace PlateUpCompetitiveMode.Views
 
             var view = prefab.AddComponent<TeamMoneyDisplayView>();
             view.MoneyNumber = prefab.transform.GetChild(0).Find("Value").GetComponent<TextMeshPro>();
-            
 
             var pos = prefab.transform.GetChild(0).localPosition;
             pos.x *= -1;
